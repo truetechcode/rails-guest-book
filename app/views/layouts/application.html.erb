@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Ruby on Rails Test</title>
-    <%= csrf_meta_tags %>
+
+<head>
+  <title>Rails Guest</title>
+  <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+<%= csrf_meta_tags %>
+      <%= stylesheet_link_tag 'application' , media: 'all' , 'data-turbolinks-track': 'reload' %>
+        <%= javascript_pack_tag 'application' , 'data-turbolinks-track': 'reload' %>
+</head>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+<body>
+  <%= yield %>
+</body>
 
-  <body>
-    <%= yield %>
-  </body>
 </html>

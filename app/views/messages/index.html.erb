@@ -2,15 +2,10 @@
 
 <h1>Messages</h1>
 
-<div>
-    <hr />
-    <a href="<%= messages_path %>">All Messages</a> |
-    <a href="<%= messages_path(filter: 'me') %>">My Messages</a> |
-    <strong><a class="btn btn-primary" href="<%= new_message_path %>" role="button">Add a Message</a></strong>
-</div>
+<%= render 'nav' %>
 
 <% @messages.each do |message| %>
-  <div class="card-body">
+  <div class="card-body <% if logged_in? and message.hidden %>text-red<% end %>">
     <hr />
     <p class="card-text"><%= message.entry %></p>
     <p class="card-text">
@@ -18,5 +13,17 @@
             <span class="text-muted">Added <%= message.created_at.to_s(:short) %> by <%= message.name %></span>
         </small>
     </p>
+
+    <p>
+    <% if logged_in? %>
+    <% if message.hidden %>
+        <%= link_to "Show", message_path(:id => message.id, :hidden => false), class: "mx-2", method: :patch %>
+    <% else %>
+        <%= link_to "Hide", message_path(:id => message.id, :hidden => true), class: "mx-2", method: :patch %>
+    <% end %>
+    <% end %>
+    </p>
+
   </div>
 <% end %>
+
